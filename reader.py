@@ -45,3 +45,24 @@ def write_new_value_csv(file):
             csv_writer.writerow(line)
 
 
+def split_file_path(split_sys_argv):
+    file_path = split_sys_argv[::-1].strip()
+    if '\\' in file_path:
+        file_name = file_path[:file_path.index('\\')]
+        directory = file_path[file_path.index('\\') + 1:]
+        file_name = file_name[::-1]
+        path_directory = directory[::-1]
+        print("Test 1 file ", file_name)
+        print("Test 2 path", path_directory)
+        if os.path.exists(path_directory):
+            return file_name, path_directory
+        else:
+            return file_name, path_directory
+    else:
+        file = split_sys_argv
+        path = os.getcwd()
+        print("Test 3 file ", file)
+        print("Test 4 path", path)
+        return split_sys_argv,os.getcwd()
+
+
