@@ -66,3 +66,24 @@ def split_file_path(split_sys_argv):
         return split_sys_argv,os.getcwd()
 
 
+# ____________________________________________
+# check_file(sys.argv[1])
+# new_values(sys.argv[3:])
+# print(file_csv_line)
+# write_new_value_csv(sys.argv[2])
+# _____________________________________________
+
+
+
+file_read, directory_read = split_file_path(sys.argv[1])
+file_write, directory_write = split_file_path(sys.argv[2])
+if os.path.isdir(directory_read):
+    print("logika ścieżki", os.path.isdir(directory_read))
+    check_file(file_read, directory_read)
+    new_values(sys.argv[3:])
+    if os.path.isdir(directory_write):
+        write_new_value_csv(sys.argv[2])
+    else:
+        print(f"Nie można zapisać. Brak katalogu: {directory_write}")
+else:
+    print(f"Brak katalogu: {directory_read}")
