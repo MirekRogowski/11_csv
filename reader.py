@@ -27,3 +27,21 @@ def check_file(file, directory):
     file_path = directory+ '\\'+ file
     # print("file_path", file_path)
     open_file(file_path) if os.path.isfile(file) else list_directory(file, directory)
+
+
+def new_values(values):
+    for lista in values:
+        item = lista.split(",")
+        y = int(item[0].strip())
+        x = int(item[1].strip())
+        value = item[2].strip()
+        file_csv_line[y][x] = value
+
+
+def write_new_value_csv(file):
+    with open(file, "w", newline="") as fw_csv:
+        csv_writer = csv.writer(fw_csv)
+        for line in file_csv_line:
+            csv_writer.writerow(line)
+
+
