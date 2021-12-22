@@ -39,10 +39,16 @@ def new_values(values):
 
 
 def write_new_value_csv(file):
-    with open(file, "w", newline="") as fw_csv:
-        csv_writer = csv.writer(fw_csv)
-        for line in file_csv_line:
-            csv_writer.writerow(line)
+    t = input("\nZapisac dane do pliku: (T/N)? ")
+    if t.lower() == "t":
+        with open(file, "w", newline="") as fw_csv:
+            csv_writer = csv.writer(fw_csv)
+            for line in file_csv_line:
+                csv_writer.writerow(line)
+        print(f"\nDane zapisane w pliku: {file}")
+    else:
+        print("\nNie zapisano zmian")
+        exit()
 
 
 def split_file_path(split_sys_argv):
@@ -52,17 +58,17 @@ def split_file_path(split_sys_argv):
         directory = file_path[file_path.index('\\') + 1:]
         file_name = file_name[::-1]
         path_directory = directory[::-1]
-        print("Test 1 file ", file_name)
-        print("Test 2 path", path_directory)
+        # print("Test 1 file ", file_name)
+        # print("Test 2 path", path_directory)
         if os.path.exists(path_directory):
             return file_name, path_directory
         else:
             return file_name, path_directory
     else:
-        file = split_sys_argv
-        path = os.getcwd()
-        print("Test 3 file ", file)
-        print("Test 4 path", path)
+        # file = split_sys_argv
+        # path = os.getcwd()
+        # print("Test 3 file ", file)
+        # print("Test 4 path", path)
         return split_sys_argv,os.getcwd()
 
 
@@ -74,13 +80,13 @@ def split_file_path(split_sys_argv):
 # _____________________________________________
 
 
-
 file_read, directory_read = split_file_path(sys.argv[1])
 file_write, directory_write = split_file_path(sys.argv[2])
 if os.path.isdir(directory_read):
-    print("logika ścieżki", os.path.isdir(directory_read))
     check_file(file_read, directory_read)
+    print(f"\nDane odczytane z pliku {directory_read}\{file_read}\n", file_csv_line)
     new_values(sys.argv[3:])
+    print(f"\nDane do zapisania w pliku {directory_write}\{file_write}\n", file_csv_line)
     if os.path.isdir(directory_write):
         write_new_value_csv(sys.argv[2])
     else:
