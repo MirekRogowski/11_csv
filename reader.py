@@ -24,9 +24,11 @@ def open_file(file):
 def check_file(file, directory):
     # print("check diretory",directory)
     # print("check file ",file)
-    file_path = directory+ '\\'+ file
+    # file_path1 = directory+ '\\'+ file
+    # print(f"file_path 1 {file_path1}")
+    # file_path = os.path.join(directory,file)
     # print("file_path", file_path)
-    open_file(file_path) if os.path.isfile(file) else list_directory(file, directory)
+    open_file(os.path.join(directory,file)) if os.path.isfile(file) else list_directory(file, directory)
 
 
 def new_values(values):
@@ -80,8 +82,8 @@ def split_file_path(split_sys_argv):
 # _____________________________________________
 
 
-file_read, directory_read = split_file_path(sys.argv[1])
-file_write, directory_write = split_file_path(sys.argv[2])
+file_read, directory_read = split_file_path(os.path.normpath(sys.argv[1]))
+file_write, directory_write = split_file_path(os.path.normpath(sys.argv[2]))
 if os.path.isdir(directory_read):
     check_file(file_read, directory_read)
     print(f"\nDane odczytane z pliku {directory_read}\{file_read}\n", file_csv_line)
